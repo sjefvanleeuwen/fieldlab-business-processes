@@ -1,4 +1,5 @@
 # fieldlab-business-processes
+[![Build Status](https://travis-ci.org/wigo4it/fieldlab-business-processes.svg?branch=master)](https://travis-ci.org/wigo4it/fieldlab-business-processes)  
 Business Processes within the fieldlab
 
 ## Folder Structures
