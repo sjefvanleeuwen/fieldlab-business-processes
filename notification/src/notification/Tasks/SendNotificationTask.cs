@@ -9,21 +9,24 @@ namespace notification.Tasks
     [ExternalTaskTopic("send-notification")]
     public class NotificationTask : IExternalTaskAdapter
     {
-        HubConnection _connection;
-
         public void Execute(ExternalTask externalTask, ref Dictionary<string, object> resultVariables)
         {
+            HubConnection connection;
             Console.WriteLine("--- External Task Variables ---");
             foreach (var item in externalTask.Variables)
             {
                 Console.WriteLine(item.Key.ToString().PadRight(18) + ": " + item.Value.Value.ToString() );
 
             }
-            _connection = new HubConnectionBuilder()
+            connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:5051/eventhub")
                 .Build();
 
-            _connection.InvokeAsync("Subscribe", "topic");
+            connection.StartAsync();
+
+
+            connection.InvokeAsync("PublishMessage",externalTask.Variables["topicid"].Value,externalTask.Variables["notificationmessage"].Value);
+            connection.DisposeAsync();
         }
     }
 }
