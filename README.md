@@ -13,4 +13,4 @@ Sends topic messages to the SignalR Server.
 documentation [here](./notification/README.md)
 
 ### Request City Pass
-Citizen process for requesting a city pass [here](./city-pass/doc/README.md)
+Citizen process for requesting a city pass [here](./city-pass/doc/readme.md)
