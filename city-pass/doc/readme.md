@@ -1,3 +1,3 @@
 # City Pass Process
 
-[request city pass](./request-city-pass.png)
+![request city pass](./request-city-pass.png)
