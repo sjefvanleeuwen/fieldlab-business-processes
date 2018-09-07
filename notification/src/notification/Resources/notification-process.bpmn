@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1lhpoqc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
+  <bpmn:process id="notification" name="notification" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="create notification">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="topicid" label="Topic ID" type="string" />
+          <camunda:formField id="notificationmessage" label="Message" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0ritbna</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0ritbna" sourceRef="StartEvent_1" targetRef="Task_18js4xc" />
+    <bpmn:endEvent id="EndEvent_07li8i6" name="portal received">
+      <bpmn:incoming>SequenceFlow_14yawzd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_14yawzd" sourceRef="Task_18js4xc" targetRef="EndEvent_07li8i6" />
+    <bpmn:serviceTask id="Task_18js4xc" name="send notification" camunda:type="external" camunda:topic="send-notification">
+      <bpmn:incoming>SequenceFlow_0ritbna</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14yawzd</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="notification">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="292" y="221" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="267" y="264" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ritbna_di" bpmnElement="SequenceFlow_0ritbna">
+        <di:waypoint x="328" y="239" />
+        <di:waypoint x="439" y="239" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_07li8i6_di" bpmnElement="EndEvent_07li8i6">
+        <dc:Bounds x="658" y="221" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="640" y="264" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_14yawzd_di" bpmnElement="SequenceFlow_14yawzd">
+        <di:waypoint x="539" y="239" />
+        <di:waypoint x="658" y="239" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1r5wy45_di" bpmnElement="Task_18js4xc">
+        <dc:Bounds x="439" y="199" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
