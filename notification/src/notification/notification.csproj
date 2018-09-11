@@ -10,5 +10,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="camundaclient" Version="0.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.0.3" />
+    <PackageReference Include="StackExchange.Redis" Version="2.00.495" />
   </ItemGroup>
 </Project>

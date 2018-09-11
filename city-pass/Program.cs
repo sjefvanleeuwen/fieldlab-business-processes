@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using CamundaClient;
 
@@ -23,6 +24,8 @@ city-pass camunda processes";
 
             CamundaEngineClient camunda = new CamundaEngineClient();            
             camunda.Startup(); // Deploys all models to Camunda and Start all found ExternalTask-Workers
+            
+
             Console.CancelKeyPress += new ConsoleCancelEventHandler(OnExit);
             _closing.WaitOne();
             camunda.Shutdown(); // Stop Task Workers
