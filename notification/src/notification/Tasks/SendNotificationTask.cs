@@ -23,9 +23,7 @@ namespace notification.Tasks
                 .Build();
 
             connection.StartAsync();
-
-
-            connection.InvokeAsync("PublishMessage",externalTask.Variables["topicid"].Value,externalTask.Variables["notificationmessage"].Value);
+            connection.InvokeAsync("PublishMessage",externalTask.Variables["topicid"].Value,externalTask.Variables["notificationmessage"].Value,"{ \"processid\" : \"" + externalTask.ProcessInstanceId + " \" }");
             connection.DisposeAsync();
         }
     }
