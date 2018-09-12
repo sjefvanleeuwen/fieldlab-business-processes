@@ -1,0 +1,6 @@
+title Data Segregation from process
+BPMN TASK->REDIS: (1) Save Key/Value
+BPMN TASK NOTIFY -> EVENT HUB: (2) Send topic notification
+EVENT HUB ->REDIS: (3) Get Key/Value
+EVENT HUB ->Portal: (4) Send topic and Key/Value
+note left of Portal: Render view 
