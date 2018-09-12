@@ -29,3 +29,7 @@ The lab contains common process sequences that offer decoupling process specific
 4. The event hub enriches the original topic/message payload with the view data stored in redis and pushes it to the portal UI.
 
 The view can now be rendered in the portal by binding to the Key/Value payload that originally came from redis cache.
+
+Viewed from a BPMN modelling perspective:  
+
+![data-segregation-from-process-bpmn](./common/sequences/data-segregation-from-process-bpmn.png)
