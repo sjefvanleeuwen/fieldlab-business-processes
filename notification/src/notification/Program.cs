@@ -41,8 +41,8 @@ notification camunda processes";
 
                 HttpClient client = new HttpClient();
 
-                while (true)
-                {
+                //while (true)
+                //{
                     var bsn=new Random().Next(1234567890);
                     Console.WriteLine($"bsn: ${bsn}");
                     var result = client.GetStringAsync($"http://localhost:5080/bg/RaadpleegIngeschrevenPersoonNAW?burgerservicenummer={bsn}").Result;
@@ -50,11 +50,12 @@ notification camunda processes";
 
                     camunda.BpmnWorkflowService.StartProcessInstance("notification", new Dictionary<string, object>()
                     {
+                        {"handleUserResponse", true},
                         {"topicid", "topic" },
                         {"notificationmessage", $"redis_get!brp-{bsn}"}
                     });
-                    Task.Delay(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
-                }
+                //    Task.Delay(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult();
+                //}
             }
             Console.CancelKeyPress += new ConsoleCancelEventHandler(OnExit);
             _closing.WaitOne();
