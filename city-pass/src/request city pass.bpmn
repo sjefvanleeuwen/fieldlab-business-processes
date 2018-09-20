@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
   <bpmn:collaboration id="Collaboration_1r1nyt4">
     <bpmn:participant id="Participant_034q116" processRef="Process_1" />
   </bpmn:collaboration>
@@ -18,13 +18,23 @@
       <bpmn:outgoing>SequenceFlow_0jnspna</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:startEvent id="StartEvent_1" name="start request">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="bsn" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_14ns70d</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:serviceTask id="Task_0kfazay" name="1.1.1 receive customer &#10;">
       <bpmn:incoming>SequenceFlow_14ns70d</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0qyzf4z</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1gif544" name="1.1.2 get customer information (BRP)">
+    <bpmn:serviceTask id="Task_1gif544" name="1.1.2 get customer information (BRP)" camunda:type="external" camunda:topic="getcustomer">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="cusomer" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0qyzf4z</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0mir0sf</bpmn:outgoing>
     </bpmn:serviceTask>
