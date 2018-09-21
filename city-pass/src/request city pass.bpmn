@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
+  <bpmn:collaboration id="Collaboration_1r1nyt4">
+    <bpmn:participant id="Participant_034q116" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1rxnn3y" />
+    <bpmn:serviceTask id="Task_04ckoqa" name="1.2.1 get relations (BRP)&#10;">
+      <bpmn:documentation>1.2.1 Haal partner relatie op bij BRP </bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="customer" />
+          <camunda:outputParameter name="relations" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0mwia6o</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0j64q35</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:manualTask id="Task_1muf6hh" name="1.1.6 wait for choice pass classification&#10;">
+      <bpmn:documentation>1.1.6 Wacht op keuze burger voor digitale pas of tastbare pas.</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_02j07hh</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1tqkypb</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:serviceTask id="Task_1dqhb54" name="1.2.2 notify municipality (relations)">
+      <bpmn:documentation>1.2.2 Gemeente op de hoogte stellen dat relatie gegevens aangevuld zijn.</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_0j64q35</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0jnspna</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1" name="start request">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="bsn" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_14ns70d</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Task_0kfazay" name="1.1.1 receive customer &#10;">
+      <bpmn:documentation>De service input is een BSN of een set aan BSN’s.</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="bsn">
+            <camunda:list>
+              <camunda:value />
+            </camunda:list>
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_14ns70d</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0qyzf4z</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_1gif544" name="1.1.2 get customer information (BRP)" camunda:type="external" camunda:topic="getcustomer">
+      <bpmn:documentation>1.1.2 Met BSN naar BRP om klant info op te halen.
+</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="bsn" />
+          <camunda:outputParameter name="customer">⦁	Naam
+⦁	Voorvoegsels
+⦁	Voorletters
+⦁	Geboorte datum 
+⦁	BSN
+⦁	Straat
+⦁	Huisnummer
+⦁	Huisletter
+⦁	Huisnummer toevoeging
+⦁	Plaats 
+⦁	Postcode
+
+</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0qyzf4z</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0mir0sf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:task id="Task_040w72v" name="1.1.3 notify municipality (Start)">
+      <bpmn:documentation>1.1.3 Gemeente op de hoogte stellen dat gegevens aangevuld zijn en dat het proces is gestart voor de betreffende klant.</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="customer" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0mir0sf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1psbbnu</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0hmhfkh" name="decision">
+      <bpmn:documentation>haal relaties op ja/nee afhankelijk van gemeente</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="gemeentecode" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1psbbnu</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0mwia6o</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_01qtew9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_141rsho" name="1.1.4 decision document to customer&#10;">
+      <bpmn:documentation>1.1.4 Beschikking naar klant. ( Ook naar DMS )</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_0jnspna</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_01qtew9</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_04ta2bw</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_0ek8155" name="1.1.5 portal notify customer">
+      <bpmn:documentation>1.1.5 Bericht naar burger portaal Citypass met keuze voor digitale pas of tastbare pas.</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_04ta2bw</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_02j07hh</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:task id="Task_077v2ar" name="1.1.7 notify municipality (pass classification">
+      <bpmn:documentation>1.1.7 Burger keuze melden aan gemeente. </bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_1tqkypb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1j0p1kj</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0fwnlak" name="decision">
+      <bpmn:documentation>palstic pass of tastbare pas</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_1j0p1kj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1tqlrjl</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0j99ux8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_0ccilia" name="1.4.1 create plastic city pass">
+      <bpmn:documentation>1.4.1 Bericht aan leverancier passen voor aanmaak pas.</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_1tqlrjl</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1jcgigd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_04mlk47" name="1.3.1  create mobile city pass&#10;">
+      <bpmn:documentation>1.3.1 Aanmaken digitale pas beschikbaar in portaal Citypass</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_0j99ux8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1uxennd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_0nuqsbo" name="end request&#10;">
+      <bpmn:incoming>SequenceFlow_1uxennd</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1jcgigd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_14ns70d" sourceRef="StartEvent_1" targetRef="Task_0kfazay" />
+    <bpmn:sequenceFlow id="SequenceFlow_0mwia6o" name="family relations&#10;" sourceRef="ExclusiveGateway_0hmhfkh" targetRef="Task_04ckoqa" />
+    <bpmn:sequenceFlow id="SequenceFlow_0j64q35" sourceRef="Task_04ckoqa" targetRef="Task_1dqhb54" />
+    <bpmn:sequenceFlow id="SequenceFlow_0jnspna" sourceRef="Task_1dqhb54" targetRef="Task_141rsho" />
+    <bpmn:sequenceFlow id="SequenceFlow_0j99ux8" name="mobile city pass&#10;" sourceRef="ExclusiveGateway_0fwnlak" targetRef="Task_04mlk47" />
+    <bpmn:sequenceFlow id="SequenceFlow_1tqlrjl" name="plastic city pass&#10;" sourceRef="ExclusiveGateway_0fwnlak" targetRef="Task_0ccilia" />
+    <bpmn:sequenceFlow id="SequenceFlow_1uxennd" sourceRef="Task_04mlk47" targetRef="EndEvent_0nuqsbo" />
+    <bpmn:sequenceFlow id="SequenceFlow_1jcgigd" sourceRef="Task_0ccilia" targetRef="EndEvent_0nuqsbo" />
+    <bpmn:sequenceFlow id="SequenceFlow_02j07hh" sourceRef="Task_0ek8155" targetRef="Task_1muf6hh" />
+    <bpmn:sequenceFlow id="SequenceFlow_0qyzf4z" sourceRef="Task_0kfazay" targetRef="Task_1gif544" />
+    <bpmn:sequenceFlow id="SequenceFlow_0mir0sf" sourceRef="Task_1gif544" targetRef="Task_040w72v" />
+    <bpmn:sequenceFlow id="SequenceFlow_1psbbnu" sourceRef="Task_040w72v" targetRef="ExclusiveGateway_0hmhfkh" />
+    <bpmn:sequenceFlow id="SequenceFlow_01qtew9" sourceRef="ExclusiveGateway_0hmhfkh" targetRef="Task_141rsho" />
+    <bpmn:sequenceFlow id="SequenceFlow_04ta2bw" sourceRef="Task_141rsho" targetRef="Task_0ek8155" />
+    <bpmn:sequenceFlow id="SequenceFlow_1tqkypb" sourceRef="Task_1muf6hh" targetRef="Task_077v2ar" />
+    <bpmn:sequenceFlow id="SequenceFlow_1j0p1kj" sourceRef="Task_077v2ar" targetRef="ExclusiveGateway_0fwnlak" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1r1nyt4">
+      <bpmndi:BPMNShape id="Participant_034q116_di" bpmnElement="Participant_034q116">
+        <dc:Bounds x="-418" y="245" width="1623" height="629" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_06n93hs_di" bpmnElement="Task_0kfazay">
+        <dc:Bounds x="-282" y="407" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0hmhfkh_di" bpmnElement="ExclusiveGateway_0hmhfkh" isMarkerVisible="true">
+        <dc:Bounds x="-132" y="491" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-207" y="506" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="-370" y="429" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-381" y="472" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1wcs95y_di" bpmnElement="Task_1dqhb54">
+        <dc:Bounds x="143" y="265" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_01tk17b_di" bpmnElement="Task_141rsho">
+        <dc:Bounds x="216" y="476" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ManualTask_0nltb93_di" bpmnElement="Task_1muf6hh">
+        <dc:Bounds x="467" y="407" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0fwnlak_di" bpmnElement="ExclusiveGateway_0fwnlak" isMarkerVisible="true">
+        <dc:Bounds x="614" y="535" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="700" y="550" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0kpbhyh_di" bpmnElement="Task_04ckoqa">
+        <dc:Bounds x="-16" y="265" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0nuqsbo_di" bpmnElement="EndEvent_0nuqsbo">
+        <dc:Bounds x="1008" y="542" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1000" y="585" width="60" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1uxennd_di" bpmnElement="SequenceFlow_1uxennd">
+        <di:waypoint x="833" y="458" />
+        <di:waypoint x="927" y="458" />
+        <di:waypoint x="927" y="560" />
+        <di:waypoint x="1008" y="560" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1tqlrjl_di" bpmnElement="SequenceFlow_1tqlrjl">
+        <di:waypoint x="639" y="585" />
+        <di:waypoint x="639" y="683" />
+        <di:waypoint x="721" y="683" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="637" y="692" width="78" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0j99ux8_di" bpmnElement="SequenceFlow_0j99ux8">
+        <di:waypoint x="639" y="535" />
+        <di:waypoint x="639" y="458" />
+        <di:waypoint x="733" y="458" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="642" y="444" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0jnspna_di" bpmnElement="SequenceFlow_0jnspna">
+        <di:waypoint x="243" y="305" />
+        <di:waypoint x="266" y="305" />
+        <di:waypoint x="266" y="476" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0j64q35_di" bpmnElement="SequenceFlow_0j64q35">
+        <di:waypoint x="84" y="305" />
+        <di:waypoint x="143" y="305" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0mwia6o_di" bpmnElement="SequenceFlow_0mwia6o">
+        <di:waypoint x="-107" y="491" />
+        <di:waypoint x="-107" y="305" />
+        <di:waypoint x="-16" y="305" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-98" y="291" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_14ns70d_di" bpmnElement="SequenceFlow_14ns70d">
+        <di:waypoint x="-334" y="447" />
+        <di:waypoint x="-282" y="447" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jcgigd_di" bpmnElement="SequenceFlow_1jcgigd">
+        <di:waypoint x="821" y="689" />
+        <di:waypoint x="929" y="689" />
+        <di:waypoint x="929" y="560" />
+        <di:waypoint x="1008" y="560" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_189ah9s_di" bpmnElement="Task_04mlk47">
+        <dc:Bounds x="733" y="418" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1czr55e_di" bpmnElement="Task_0ccilia">
+        <dc:Bounds x="721" y="650" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_02j07hh_di" bpmnElement="SequenceFlow_02j07hh">
+        <di:waypoint x="316" y="630" />
+        <di:waypoint x="392" y="630" />
+        <di:waypoint x="392" y="447" />
+        <di:waypoint x="467" y="447" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0lah5hh_di" bpmnElement="Task_0ek8155">
+        <dc:Bounds x="216" y="590" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0t6nle5_di" bpmnElement="Task_1gif544">
+        <dc:Bounds x="-282" y="529" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0qyzf4z_di" bpmnElement="SequenceFlow_0qyzf4z">
+        <di:waypoint x="-232" y="487" />
+        <di:waypoint x="-232" y="529" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_040w72v_di" bpmnElement="Task_040w72v">
+        <dc:Bounds x="-282" y="666" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0mir0sf_di" bpmnElement="SequenceFlow_0mir0sf">
+        <di:waypoint x="-232" y="609" />
+        <di:waypoint x="-232" y="666" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1psbbnu_di" bpmnElement="SequenceFlow_1psbbnu">
+        <di:waypoint x="-182" y="706" />
+        <di:waypoint x="-107" y="706" />
+        <di:waypoint x="-107" y="541" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_01qtew9_di" bpmnElement="SequenceFlow_01qtew9">
+        <di:waypoint x="-82" y="516" />
+        <di:waypoint x="216" y="516" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_04ta2bw_di" bpmnElement="SequenceFlow_04ta2bw">
+        <di:waypoint x="266" y="556" />
+        <di:waypoint x="266" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_077v2ar_di" bpmnElement="Task_077v2ar">
+        <dc:Bounds x="467" y="520" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1tqkypb_di" bpmnElement="SequenceFlow_1tqkypb">
+        <di:waypoint x="517" y="487" />
+        <di:waypoint x="517" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1j0p1kj_di" bpmnElement="SequenceFlow_1j0p1kj">
+        <di:waypoint x="567" y="560" />
+        <di:waypoint x="614" y="560" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
