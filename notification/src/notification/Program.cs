@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 using StackExchange.Redis;
 
 namespace notification {
-    class Program
+    public  class Program
     {
         public static IDatabase Db;
 
