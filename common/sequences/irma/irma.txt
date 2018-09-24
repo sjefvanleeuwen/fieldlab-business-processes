@@ -1,0 +1,11 @@
+title Login process IRMA (Burger)
+
+Browser -> Portal  : Login IRMA
+Portal-> IRMA: Request Login token QRCode
+IRMA -> Portal: QR Code
+Portal -> Browser: Toon QR Code
+Mobile -> Portal: Scan QR Code (Request Attribute)
+Mobile -> IRMA: Send Attribute (BSN)
+IRMA -> Mobile : Valid OK/NOK
+IRMA -> Browser: JWT Token (BSN Payload)
+Browser -> Portal: Send JWT Token (custom)
