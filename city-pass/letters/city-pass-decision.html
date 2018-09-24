@@ -8,81 +8,68 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body style="page-orientation: landscape">
+  <body style="page-orientation: portrait">
     <p>
      <img src="https://mirrors.creativecommons.org/presskit/logos/cc.logo.large.png" style="width:250px"/>
     </p>
     <header> 
       <address class="return-address">
-        Willie W Wilkerson<br/>
-        260 Ryder Avenue<br/>
-        98201 Everett WA<br/>    
+        <span data-bind="text: voornamen"></span><span data-bind="text: voorvoegselGeslachtnaam"></span><span data-bind="text: geslachtnaam"></span>
+        <span data-bind="text: straatnaam"></span><span data-bind="text: huisnummer"></span><span data-bind="text: huisletter"></span>
+        <span data-bind="text: postcode"></span><span data-bind="text: woonplaatsnaam"></span>    
       </address>
 
-      <time datetime="2017-12-02">December 2nd, 2017</time>
+      Datum: <span data-bind="text: sydate"></span>
     </header>
 
     <h1>
-      Subject:  A subject
+      toekenning stadspas
     </h1>
 <br>
-    <div class="content"> <!-- use this div only if it is required for styling -->
+    <div class="content">
         <p>
-          Beste Willie W Wilkerson,
-          <br class="salution" />
-
-          Op 20 december 2018 is het recht op een city pass 2019 vastgesteld.
-
-          Wat is het besluit? Vet
-          Er is besloten dat de volgende personen recht hebben op een city pass voor 2019:
-
-          voorletters naam persoon en geboortedatum
-          voorletters naam persoon en geboortedatum
-
-          Het recht op de city pass wordt jaarlijks verlengd.
-
-          Wat moet u doen? Vet
-          Vraagt u de city pass voor het eerst aan? Dan ontvangt u binnenn 4 weken een pasfoto formulier. Op dit formulier staat wat u moet doen om de city pass in uw
-          bezit te krijgen.
-          Heeft u al een city pass? Dan wordt deze voor 2019 verlengd.
-          U bent verplicht om wijzigingen in uw gezins-, vermogens-, of inkomenssituatie door te geven.
-          Als blijk dat u onvolledige of onjuiste gegevens doorgeeft, dan kunnen wij uw city pas en die van uw gezinsleden blokkeren. U kunt de pas dan niet meer gebruiken.
+          Beste <span data-bind="text: voornamen"></span><span data-bind="text: voorvoegselGeslachtnaam"></span><span data-bind="text: geslachtnaam"></span>,
           
-          Heeft u nog vrtagen?
-          Belt u gerust met de klantenservice als u nog vragen heeft. Zij zijn te bereiken op werkdagen van 8:30 tot 17:00 uur via telefoonnummer 123456789. U kunt ook
-          mailen naar klantenservice@gemeentenaam.nl. Meer informatie kunt u vinden op www.gemeentenaam.nl.
+          Op <span data-bind="text: sydate"></span> is het recht op een stadspas 2019 vastgesteld.
+
+          Wat is het besluit?
+          Er is besloten dat de volgende personen recht hebben op een stadspas voor 2019:
+
+          <span data-bind="text: voornamen"></span><span data-bind="text: voorvoegselGeslachtnaam"></span><span data-bind="text: geslachtnaam"></span><span data-bind="text: geboortedatum"></span>
+          <span data-bind="text: partner voornamen"></span><span data-bind="text: partner voorvoegselGeslachtnaam"><span data-bind="text: partner geslachtnaam"></span></span><span data-bind="text: partner geboortedatum"></span>
+          
+          U komt in aanmerking voor de stadspas omdat uw inkomen onder de inkomensgrens van 115% van de bijstandsnorm is vastgesteld. 
+          Het recht op de stadspas wordt jaarlijks verlengd. Heeft u al een stadspas? Dan wordt deze voor 2019 automatisch verlengd.
+          U bent verplicht om wijzigingen in uw gezins-, vermogens-, of inkomenssituatie door te geven.
+          Als blijk dat u onvolledige of onjuiste gegevens doorgeeft, dan kunnen wij uw stadspas en die van uw gezinsleden blokkeren. U kunt de pas dan niet meer gebruiken.
+          
+          Heeft u nog vragen?
+          Voor meer informatie over de stadspas neemt u contact op met de afdeling Sociale Zaken en Werkgelegenheid. U kunt hiervoor bellen met het nummer 14 023.
+          U kunt ook mailen naar klantenservice@haarlem.nl. Meer informatie kunt u vinden op www.haarlem.nl.
 
           Met vriendelijke groet,
           Namens burgemeester en wethouders,
 
           Managernaam
-          Manager afdeling City Pass
+          Manager afdeling stadspas
 
           Dit documemnt is automatisch aangemaakt. Daarom ziet u geen handtekening.
 
           Waar staat dit in de wet?
-          City pass: artikel x lid y gemeentenaam
+          Beleidsregels Stadspas Haarlem
 
           Bent u het niet eens met het besluit?
-          Neemt u dan eerst contact op met de klantenservice via telefoonnummer 123456789.
+          Neemt u dan eerst contact op met de afdeling Sociale Zaken en Werkgelegenheid.
 
           Blijft u het oneens? U kunt dan bezwaar maken tot uiterlijk 6 weken na de datum van dit besluit. Dat kan op 2 maieren:
-          1. Digitaal via onze website www.gemeentnaam.nl/bezwaar
+          1. Digitaal via onze website www.haarlem.nl/bezwaar
           2. met een brief naar het volgende adres:
-          gemeentenaam 
-          Postbus 12345
-          postcode gemeentenaam
-
+          Gemeente Haarlem afdeling Sociale Zaken en Werkgelegenheid
+          Postbus 511 
+          2003 PB Haarlem
           
-
-
-
-
         </p>
-        <p>
-          …
-        </p>
-      </div>
+      </div class="content">
 
   </body>
 

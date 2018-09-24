@@ -5,8 +5,8 @@
   </bpmn:collaboration>
   <bpmn:process id="Process_1" isExecutable="false">
     <bpmn:laneSet id="LaneSet_1rxnn3y" />
-    <bpmn:serviceTask id="Task_04ckoqa" name="1.2.1 get relations (BRP)&#10;">
-      <bpmn:documentation>1.2.1 Haal partner relatie op bij BRP </bpmn:documentation>
+    <bpmn:serviceTask id="Task_04ckoqa" name="1.2.1 get relations (BRP)&#10;" camunda:type="external" camunda:topic="getrelations">
+      <bpmn:documentation>1.2.1 Haal partner relatie op bij BRP</bpmn:documentation>
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="customer" />
@@ -49,8 +49,7 @@
       <bpmn:outgoing>SequenceFlow_0qyzf4z</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Task_1gif544" name="1.1.2 get customer information (BRP)" camunda:type="external" camunda:topic="getcustomer">
-      <bpmn:documentation>1.1.2 Met BSN naar BRP om klant info op te halen.
-</bpmn:documentation>
+      <bpmn:documentation>1.1.2 Met BSN naar BRP om klant info op te halen.</bpmn:documentation>
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="bsn" />
@@ -64,9 +63,7 @@
 ⦁	Huisletter
 ⦁	Huisnummer toevoeging
 ⦁	Plaats 
-⦁	Postcode
-
-</camunda:outputParameter>
+⦁	Postcode</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0qyzf4z</bpmn:incoming>
@@ -105,7 +102,7 @@
       <bpmn:outgoing>SequenceFlow_02j07hh</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:task id="Task_077v2ar" name="1.1.7 notify municipality (pass classification">
-      <bpmn:documentation>1.1.7 Burger keuze melden aan gemeente. </bpmn:documentation>
+      <bpmn:documentation>1.1.7 Burger keuze melden aan gemeente.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_1tqkypb</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1j0p1kj</bpmn:outgoing>
     </bpmn:task>
