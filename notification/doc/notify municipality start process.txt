@@ -1,0 +1,5 @@
+title 1.1.4 notify municipality start process
+
+start notify -> municipalty portal :customer information
+
+municipalty portal -> start notify:  received
