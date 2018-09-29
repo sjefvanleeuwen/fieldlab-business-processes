@@ -1,0 +1,5 @@
+title 1.1.4 notify municipality
+
+start notify -> municipalty portal :choice pass classification
+
+municipalty portal -> start notify:  received
