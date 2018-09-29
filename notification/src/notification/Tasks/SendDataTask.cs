@@ -22,18 +22,14 @@ namespace notification.Tasks
                 Console.WriteLine(item.Key.ToString().PadRight(18) + ": " + item.Value.Value.ToString() );
             }            
 
-            connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5051/eventhub")
-                .Build();
 
             Console.WriteLine($"getting data from redis store key: {externalTask.Variables["datakey"].Value.ToString()}");
 
-            connection.StartAsync();
-            connection.InvokeAsync("PublishMessage",
+
+            Program.connection.InvokeAsync("PublishMessage",
                 externalTask.Variables["topicid"].Value,
                 externalTask.Variables["notificationmessage"].Value,
-                Program.Db.StringGet(externalTask.Variables["datakey"].Value.ToString()),s);
-            connection.DisposeAsync();
+                Program.Db.StringGet(externalTask.Variables["datakey"].Value.ToString()),s).GetAwaiter();
         }
     }
 }

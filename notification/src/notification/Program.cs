@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace notification {
     public  class Program
@@ -26,8 +27,17 @@ private static string logo = @"
 notification camunda processes";
 
         private static readonly AutoResetEvent _closing = new AutoResetEvent(false);
+        
+        public static HubConnection connection;
+
         private static void Main(string[] args)
         {
+            connection = new HubConnectionBuilder()
+                .WithUrl("http://localhost:5051/eventhub")
+                .Build();
+            
+            connection.StartAsync().GetAwaiter();
+
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine( logo + "\n\n" + "Starting redis client.\n\n");
 
@@ -41,6 +51,7 @@ notification camunda processes";
             Console.CancelKeyPress += new ConsoleCancelEventHandler(OnExit);
             _closing.WaitOne();
             camunda.Shutdown(); // Stop Task Workers
+            connection.DisposeAsync();
         }
 
         protected static void OnExit(object sender, ConsoleCancelEventArgs args)
