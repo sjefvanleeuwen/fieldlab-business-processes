@@ -12,6 +12,19 @@ using StackExchange.Redis;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace notification {
+
+    public class User
+    {
+        public string ConnectionId {get;set;}
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Token { get; set; }
+    }
+
+
     public  class Program
     {
         public static IDatabase Db;
@@ -32,12 +45,20 @@ notification camunda processes";
 
         private static void Main(string[] args)
         {
+            var auth = new HubConnectionBuilder()
+                .WithUrl("http://localhost:5051/authenticationhub")
+                .Build();
+
+            auth.StartAsync();
+            var s = auth.InvokeAsync<User>("Authenticate","serviceaccount","test").Result;
+
             connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5051/eventhub")
+                .WithUrl("http://localhost:5051/eventhub",options => {
+                     options.AccessTokenProvider = () => Task.FromResult(s.Token);
+                })
                 .Build();
             
             connection.StartAsync().GetAwaiter();
-
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine( logo + "\n\n" + "Starting redis client.\n\n");
 
