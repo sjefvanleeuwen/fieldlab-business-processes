@@ -27,7 +27,7 @@ namespace notification.Tasks
             HttpClient client = new HttpClient();
             var bsn=externalTask.Variables["bsn"].Value;
             Console.WriteLine($"bsn: {bsn}");
-            var result = client.GetStringAsync($"http://localhost:5080/bg/RaadpleegIngeschrevenPersoonNAW?burgerservicenummer={bsn}").Result;
+            var result = client.GetStringAsync($"http://wigo4it-k8s.464b0cafc5de44b9bc20.westeurope.aksapp.io:5080/bg/RaadpleegIngeschrevenPersoonNAW?burgerservicenummer={bsn}").Result;
             
             Console.WriteLine($"saving data to redis store key: {externalTask.Variables["datakey"].Value.ToString()}");
             
