@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="bijstandsnormEnRecht" name="Bijstandsnorm en Recht" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="pensioengerechtigd" name="pensioengerechtigd">
+    <extensionElements>
+      <biodi:bounds x="176" y="61" width="180" height="80" />
+      <biodi:edge source="InputData_00m34dx">
+        <biodi:waypoints x="111" y="72" />
+        <biodi:waypoints x="176" y="93" />
+      </biodi:edge>
+      <biodi:edge source="InputData_04uw9x1">
+        <biodi:waypoints x="107" y="136" />
+        <biodi:waypoints x="176" y="114" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_00m34dx" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_04uw9x1" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_17q0i1a" hitPolicy="FIRST">
+      <input id="InputClause_1fq593y" label="leeftijd">
+        <inputExpression id="LiteralExpression_00rpi6q" typeRef="integer">
+          <text>leeftijd</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1ksf3gm" label="leeftijdpartner">
+        <inputExpression id="LiteralExpression_0ncyanw" typeRef="integer">
+          <text>leeftijdpartner</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1grwt1j" label="pensioengerechtigd" name="pensioengerechtigd" typeRef="boolean" />
+      <output id="OutputClause_11q9xgq" label="omschrijving" name="omschrijving" typeRef="string" />
+      <rule id="DecisionRule_0v3oi11">
+        <description></description>
+        <inputEntry id="UnaryTests_0r74pux">
+          <text>&gt;=65</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07mzs74">
+          <text>&gt;=0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1030zv3">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ppkofc">
+          <text>'pensioen gerechtigd'</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_07puy4b">
+        <description></description>
+        <inputEntry id="UnaryTests_0g8qovb">
+          <text>&gt;=0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1779dha">
+          <text>&gt;=65</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0yjw1gp">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1d8xrj1">
+          <text>'pensioen gerechtigd'</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0atk5jx">
+        <description></description>
+        <inputEntry id="UnaryTests_01ev8pw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1j356w0">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0t3dvyv">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1aiolrc">
+          <text>'niet pensioen gerechtigd'</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="normDecision" name="norm">
+    <extensionElements>
+      <biodi:bounds x="405" y="61" width="180" height="80" />
+      <biodi:edge source="pensioengerechtigd">
+        <biodi:waypoints x="356" y="101" />
+        <biodi:waypoints x="404" y="101" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0lkfkjj">
+        <biodi:waypoints x="506" y="1" />
+        <biodi:waypoints x="506" y="58" />
+      </biodi:edge>
+      <biodi:edge source="InputData_1iz25jo">
+        <biodi:waypoints x="365" y="0" />
+        <biodi:waypoints x="455" y="61" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#pensioengerechtigd" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_0lkfkjj" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1jysn0a" hitPolicy="FIRST">
+      <input id="InputClause_07dg5vs" label="pensioengerechtigd">
+        <inputExpression id="LiteralExpression_1y9up66" typeRef="boolean">
+          <text>pensioengerechtigd</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0w9oyxa" label="kindereninwonend">
+        <inputExpression id="LiteralExpression_1kwayxh" typeRef="boolean">
+          <text>kindereninwonend</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_169bom8" label="leeftijd">
+        <inputExpression id="LiteralExpression_0ylgfjk" typeRef="integer">
+          <text>leeftijd</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0xdnnut" label="leeftijdpartner">
+        <inputExpression id="LiteralExpression_1ngw4za" typeRef="integer">
+          <text>leeftijdpartner</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0yih3rc" label="norm" name="norm" typeRef="double" />
+      <output id="OutputClause_03ny6pc" label="maximaaleigenvermogen" name="maximaaleigenvermogen" typeRef="double" />
+      <output id="OutputClause_1nk9229" label="omschrijving" name="omschrijving" typeRef="string" />
+      <rule id="DecisionRule_0w3ou0j">
+        <description></description>
+        <inputEntry id="UnaryTests_1hkyl65">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1shml0i">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0z1axh3">
+          <text>[21..64]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hiwzhk">
+          <text>[21..64]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0vv71il">
+          <text>1352.48</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_01y0so9">
+          <text>12040</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1gfjatn">
+          <text>"Echtpaar, beiden tussen 21 jaar en pensioengerechtigde leeftijd"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1y9a4km">
+        <description></description>
+        <inputEntry id="UnaryTests_05rg9gu">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gjvxsi">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xis0v4">
+          <text>[21..64]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wxpfv0">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0zs6mgo">
+          <text>946.73</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_146tso2">
+          <text>12040</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_02f1bbz">
+          <text>"Eénoudergezin tussen 21 jaar en pensioengerechtigde leeftijd"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1pvimpk">
+        <description></description>
+        <inputEntry id="UnaryTests_1mue5ko">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jd535s">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1flq6jm">
+          <text>[21..64]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_155joe5">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0oz1vzc">
+          <text>946.73</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ac142j">
+          <text>6020</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ohkv3c">
+          <text>"Alleenstaande tussen 21 jaar en pensioengerechtigde leeftijd"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0zg80i0">
+        <description></description>
+        <inputEntry id="UnaryTests_1rpn7vn">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12557kb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qfjqaq">
+          <text>&gt;0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dom11n">
+          <text>&gt;0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mw9o8w">
+          <text>1456.52</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0mx88ve">
+          <text>12040</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0a5ly5r">
+          <text>"Echtpaar (pensioengerechtigd)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1jfnwcf">
+        <description></description>
+        <inputEntry id="UnaryTests_1mshpdc">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bwjuz4">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18jvuem">
+          <text>&gt;64</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ly6g2m">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0knt593">
+          <text>1065.36</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_142rddh">
+          <text>12040</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1bu71zi">
+          <text>"Alleenstaande ouder (pensioengerechtigd)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1q58jgr">
+        <description></description>
+        <inputEntry id="UnaryTests_183lty2">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bs2epu">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1y9bz3c">
+          <text>&gt;64</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rdbe2b">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1d1iujw">
+          <text>1065.36</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_10x519c">
+          <text>6020</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qtmwbr">
+          <text>"Alleenstaande (pensioengerechtigd)"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0s52han">
+        <inputEntry id="UnaryTests_0a2tgrg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yzuab1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_084wak5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kghrw8">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0755c2x">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0herd6m">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09xoi3z">
+          <text>"Geen rechthebbende"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_00m34dx" name="leeftijd">
+    <extensionElements>
+      <biodi:bounds x="-14" y="44" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_04uw9x1" name="leeftijdpartner">
+    <extensionElements>
+      <biodi:bounds x="-18" y="122" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_0lkfkjj" name="kindereninwonend">
+    <extensionElements>
+      <biodi:bounds x="443" y="-44" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="rechtDecision" name="recht">
+    <extensionElements>
+      <biodi:bounds x="619" y="63" width="180" height="80" />
+      <biodi:edge source="normDecision">
+        <biodi:waypoints x="585" y="101" />
+        <biodi:waypoints x="619" y="101" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0a7xhxd">
+        <biodi:waypoints x="703" y="-1" />
+        <biodi:waypoints x="705" y="61" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#normDecision" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_0a7xhxd" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1d0rnec">
+      <input id="InputClause_15iglye" label="eigenvermogen">
+        <inputExpression id="LiteralExpression_0thzywb" typeRef="double">
+          <text>eigenvermogen</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0jyl7cu" label="rechthebbend" name="rechthebbend" typeRef="boolean" />
+      <rule id="DecisionRule_01z4773">
+        <inputEntry id="UnaryTests_0z3pipm">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_169l90x">
+          <text>maximaaleigenvermogen &gt; eigenvermogen</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0a7xhxd" name="eigenvermogen">
+    <extensionElements>
+      <biodi:bounds x="641" y="-46" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+</definitions>

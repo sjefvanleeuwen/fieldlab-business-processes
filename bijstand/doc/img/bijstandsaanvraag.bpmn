@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_14f58tk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
+  <bpmn:process id="Aanvraagprocess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="aanvraag" camunda:formKey="aanvraag">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property />
+        </camunda:properties>
+        <camunda:formData>
+          <camunda:formField id="leeftijd" label="leeftijd" type="long" defaultValue="21" />
+          <camunda:formField id="leeftijdpartner" label="leeftijd partner" type="long" defaultValue="21" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_1nmrtzm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:businessRuleTask id="Task_1ihfmpq" name="bijstandsnorm en recht" camunda:decisionRef="decisionBijstand">
+      <bpmn:incoming>SequenceFlow_1nmrtzm</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0gq7d3i</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1nmrtzm" sourceRef="StartEvent_1" targetRef="Task_1ihfmpq" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0weqrik">
+      <bpmn:incoming>SequenceFlow_0gq7d3i</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1pm3zv4</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0bgl1bb</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0gq7d3i" sourceRef="Task_1ihfmpq" targetRef="ExclusiveGateway_0weqrik" />
+    <bpmn:sequenceFlow id="SequenceFlow_1pm3zv4" name="recht" sourceRef="ExclusiveGateway_0weqrik" targetRef="Task_1ho4a7u">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${rechthebbend}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0bgl1bb" name="geen recht" sourceRef="ExclusiveGateway_0weqrik" targetRef="Task_0qi61y1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">!${rechthebbend}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_0ziucmf">
+      <bpmn:incoming>SequenceFlow_0ssg18s</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1erixmf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0ssg18s" sourceRef="Task_1ho4a7u" targetRef="EndEvent_0ziucmf" />
+    <bpmn:sequenceFlow id="SequenceFlow_1erixmf" sourceRef="Task_0qi61y1" targetRef="EndEvent_0ziucmf" />
+    <bpmn:userTask id="Task_1ho4a7u" name="toekennen">
+      <bpmn:incoming>SequenceFlow_1pm3zv4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ssg18s</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_0qi61y1" name="afwijzen">
+      <bpmn:incoming>SequenceFlow_0bgl1bb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1erixmf</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Aanvraagprocess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="212" y="213" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="207" y="256" width="46" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BusinessRuleTask_064e0my_di" bpmnElement="Task_1ihfmpq">
+        <dc:Bounds x="323" y="191" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1nmrtzm_di" bpmnElement="SequenceFlow_1nmrtzm">
+        <di:waypoint x="248" y="231" />
+        <di:waypoint x="323" y="231" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0weqrik_di" bpmnElement="ExclusiveGateway_0weqrik" isMarkerVisible="true">
+        <dc:Bounds x="530" y="206" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0gq7d3i_di" bpmnElement="SequenceFlow_0gq7d3i">
+        <di:waypoint x="423" y="231" />
+        <di:waypoint x="530" y="231" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1pm3zv4_di" bpmnElement="SequenceFlow_1pm3zv4">
+        <di:waypoint x="555" y="206" />
+        <di:waypoint x="555" y="104" />
+        <di:waypoint x="607" y="104" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="502" y="159" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0bgl1bb_di" bpmnElement="SequenceFlow_0bgl1bb">
+        <di:waypoint x="555" y="256" />
+        <di:waypoint x="555" y="350" />
+        <di:waypoint x="607" y="350" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="489" y="288" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0ziucmf_di" bpmnElement="EndEvent_0ziucmf">
+        <dc:Bounds x="824" y="213" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ssg18s_di" bpmnElement="SequenceFlow_0ssg18s">
+        <di:waypoint x="707" y="104" />
+        <di:waypoint x="753" y="104" />
+        <di:waypoint x="753" y="231" />
+        <di:waypoint x="824" y="231" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1erixmf_di" bpmnElement="SequenceFlow_1erixmf">
+        <di:waypoint x="707" y="350" />
+        <di:waypoint x="753" y="350" />
+        <di:waypoint x="753" y="231" />
+        <di:waypoint x="824" y="231" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1dyzr1c_di" bpmnElement="Task_1ho4a7u">
+        <dc:Bounds x="607" y="64" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1gqsxd4_di" bpmnElement="Task_0qi61y1">
+        <dc:Bounds x="607" y="310" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
