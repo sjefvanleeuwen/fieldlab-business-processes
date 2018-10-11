@@ -34,3 +34,6 @@ This is a small test using mainly DMN decision tables to calculate / determine i
 
 ![](./img/decision-recht-trace.png)
 
+## Putting the DMN into the bpmn process
+
+![](./img/bijstandsaanvraag-process.png)
