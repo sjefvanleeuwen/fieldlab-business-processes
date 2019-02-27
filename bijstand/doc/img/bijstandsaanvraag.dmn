@@ -43,7 +43,7 @@
           <text>true</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0ppkofc">
-          <text>'pensioen gerechtigd'</text>
+          <text>"pensioen gerechtigd"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_07puy4b">
@@ -58,7 +58,7 @@
           <text>true</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1d8xrj1">
-          <text>'pensioen gerechtigd'</text>
+          <text>"pensioen gerechtigd"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0atk5jx">
@@ -73,7 +73,7 @@
           <text>false</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1aiolrc">
-          <text>'niet pensioen gerechtigd'</text>
+          <text>"niet pensioen gerechtigd"</text>
         </outputEntry>
       </rule>
     </decisionTable>
