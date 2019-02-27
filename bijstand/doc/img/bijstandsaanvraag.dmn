@@ -327,8 +327,16 @@
       <requiredInput href="#InputData_0a7xhxd" />
     </informationRequirement>
     <decisionTable id="DecisionTable_1d0rnec">
+      <input id="InputClause_0wfkjxj">
+        <inputExpression id="LiteralExpression_075dae9" typeRef="double">
+          <text>eigenvermogen</text>
+        </inputExpression>
+      </input>
       <output id="OutputClause_0jyl7cu" label="rechthebbend" name="rechthebbend" typeRef="boolean" />
       <rule id="DecisionRule_01z4773">
+        <inputEntry id="UnaryTests_0u2nyp6">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_169l90x">
           <text>maximaaleigenvermogen &gt; eigenvermogen</text>
         </outputEntry>
