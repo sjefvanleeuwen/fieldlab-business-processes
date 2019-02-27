@@ -327,7 +327,7 @@
       <requiredInput href="#InputData_0a7xhxd" />
     </informationRequirement>
     <decisionTable id="DecisionTable_1d0rnec">
-      <input id="InputClause_0wfkjxj">
+      <input id="InputClause_0wfkjxj" label="eigenvermogen">
         <inputExpression id="LiteralExpression_075dae9" typeRef="double">
           <text>eigenvermogen</text>
         </inputExpression>
