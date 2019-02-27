@@ -34,10 +34,10 @@
       <rule id="DecisionRule_0v3oi11">
         <description></description>
         <inputEntry id="UnaryTests_0r74pux">
-          <text>&gt;=65</text>
+          <text>&gt;= 65</text>
         </inputEntry>
         <inputEntry id="UnaryTests_07mzs74">
-          <text>&gt;=0</text>
+          <text>&gt;= 0</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1030zv3">
           <text>true</text>
@@ -49,10 +49,10 @@
       <rule id="DecisionRule_07puy4b">
         <description></description>
         <inputEntry id="UnaryTests_0g8qovb">
-          <text>&gt;=0</text>
+          <text>&gt;= 0</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1779dha">
-          <text>&gt;=65</text>
+          <text>&gt;= 65</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0yjw1gp">
           <text>true</text>
@@ -327,16 +327,8 @@
       <requiredInput href="#InputData_0a7xhxd" />
     </informationRequirement>
     <decisionTable id="DecisionTable_1d0rnec">
-      <input id="InputClause_15iglye" label="eigenvermogen">
-        <inputExpression id="LiteralExpression_0thzywb" typeRef="double">
-          <text>eigenvermogen</text>
-        </inputExpression>
-      </input>
       <output id="OutputClause_0jyl7cu" label="rechthebbend" name="rechthebbend" typeRef="boolean" />
       <rule id="DecisionRule_01z4773">
-        <inputEntry id="UnaryTests_0z3pipm">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_169l90x">
           <text>maximaaleigenvermogen &gt; eigenvermogen</text>
         </outputEntry>
