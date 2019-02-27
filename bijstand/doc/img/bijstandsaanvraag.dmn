@@ -205,10 +205,10 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0qfjqaq">
-          <text>&gt;0</text>
+          <text>&gt; 0</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1dom11n">
-          <text>&gt;0</text>
+          <text>&gt; 0</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1mw9o8w">
           <text>1456.52</text>
@@ -229,7 +229,7 @@
           <text>true</text>
         </inputEntry>
         <inputEntry id="UnaryTests_18jvuem">
-          <text>&gt;64</text>
+          <text>&gt; 64</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1ly6g2m">
           <text>0</text>
@@ -253,7 +253,7 @@
           <text>false</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1y9bz3c">
-          <text>&gt;64</text>
+          <text>&gt; 64</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1rdbe2b">
           <text>0</text>
