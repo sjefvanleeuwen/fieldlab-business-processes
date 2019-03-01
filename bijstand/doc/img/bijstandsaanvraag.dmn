@@ -316,8 +316,8 @@
         <biodi:waypoints x="619" y="101" />
       </biodi:edge>
       <biodi:edge source="InputData_0a7xhxd">
-        <biodi:waypoints x="703" y="-1" />
-        <biodi:waypoints x="705" y="61" />
+        <biodi:waypoints x="706" y="207" />
+        <biodi:waypoints x="705" y="143" />
       </biodi:edge>
     </extensionElements>
     <informationRequirement>
@@ -338,14 +338,14 @@
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_169l90x">
-          <text>maximaaleigenvermogen &gt; eigenvermogen</text>
+          <text>maximaaleigenvermogen &gt; eigenvermogen &amp;&amp; norm &gt; 0</text>
         </outputEntry>
       </rule>
     </decisionTable>
   </decision>
   <inputData id="InputData_0a7xhxd" name="eigenvermogen">
     <extensionElements>
-      <biodi:bounds x="641" y="-46" width="125" height="45" />
+      <biodi:bounds x="644" y="207" width="125" height="45" />
     </extensionElements>
   </inputData>
 </definitions>
